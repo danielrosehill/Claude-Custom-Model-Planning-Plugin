@@ -1,0 +1,20 @@
+{
+  "name": "custom-model-planning",
+  "version": "1.0.0",
+  "description": "Plan custom small models and fine-tunes: check what the Hub already offers, research the options, and write the spec, all in a planning repo.",
+  "author": {
+    "name": "Daniel Rosehill",
+    "url": "https://github.com/danielrosehill"
+  },
+  "repository": "https://github.com/danielrosehill/Claude-Custom-Model-Planning-Plugin",
+  "license": "MIT",
+  "keywords": [
+    "fine-tuning",
+    "small-models",
+    "classifiers",
+    "hugging-face",
+    "model-research",
+    "model-spec",
+    "open-source-ai"
+  ]
+}
