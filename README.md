@@ -80,7 +80,7 @@ The plugin degrades gracefully without these and uses the `hf` CLI or REST API d
 - **Official Hugging Face skills** (`/plugin marketplace add huggingface/skills`):
   `hf-cli`, `huggingface-papers`, `huggingface-datasets`, `hf-mem`, and the trainer
   skills for the build phase.
-- **Same marketplace:** `data-annotation`, `synthetic-data`, `Claude-Data-Wrangler`,
+- **Same marketplace:** `data-annotation`, `synthetic-data`, `data-wrangler`,
   `eval-runner`, and `ai-model-research` (for choosing a hosted LLM when the verdict
   is "prompt an LLM").
 

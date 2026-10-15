@@ -28,7 +28,7 @@ Skill names as of 2026-10-15:
 | --- | --- |
 | Designing a label schema and annotating data | `data-annotation` |
 | Generating synthetic training data | `synthetic-data` |
-| Cleaning and packaging datasets, pushing to the Hub | `Claude-Data-Wrangler` |
+| Cleaning and packaging datasets, pushing to the Hub | `data-wrangler` |
 | Building and running eval suites | `eval-runner` |
 | Choosing a **hosted** LLM to call (rung 2 of the ladder) | `ai-model-research` (OpenRouter catalogue) |
 
