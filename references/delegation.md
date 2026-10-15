@@ -39,5 +39,6 @@ Skill names as of 2026-10-15:
   the user starts it.
 - **No Hub writes** without an explicit request. Creating a model or dataset repo
   is publishing.
-- **No GitHub repo creation** beyond the planning repo itself, which
-  `start-model-project` creates private unless told otherwise.
+- **No GitHub repo creation** beyond the project repo, and its public tracker when
+  the model will be released publicly. `start-model-project` creates the project
+  repo private unless the user asked for public or said the model will be public.

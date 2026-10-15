@@ -44,7 +44,10 @@ Plugin references live at `../../references/` relative to this skill's directory
    (`license`, `language`, `pipeline_tag`, `base_model`, `datasets`, `tags`,
    `library_name`) and sections for intended use, out-of-scope use, training data,
    evaluation (placeholders for numbers), limitations, and how to use. Fill
-   everything the plan already knows.
+   everything the plan already knows. When the model is built around the user's
+   own use case (their languages, domain, voice or data), say so plainly under
+   limitations and add a short **Adapting it** section: which dataset to swap or
+   extend and how to fine-tune further from the published checkpoint.
 4. Update the README's read-in-this-order table and status line. Set
    `project.json` → `stages.spec` done and `status` stays `planning` until data work
    starts. Mirror into the hub registry. Commit and push.

@@ -33,7 +33,7 @@ capture-model-idea ─► model-exists-check ─► start-model-project ─► f
 | --- | --- | --- |
 | `capture-model-idea` | Write down a model idea before deciding whether it earns a repo | `ideas/<slug>.md` in the hub, or `docs/idea.md` |
 | `model-exists-check` | Quick Hub triage: is there already a model, fine-tune or dataset for this? Verdict: exists / partial / none | `docs/research/` |
-| `start-model-project` | Create a **private** planning repo, seed `project.json`, register it in the hub | new repo |
+| `start-model-project` | Create the planning repo (**private** by default; plus a public lifecycle repo when the model will be public), seed `project.json`, register it in the hub | new repo(s) |
 | `frame-the-task` | Turn the idea into an ML task: formulation, I/O contract, labels, constraints, success metric | `docs/requirements.md` |
 | `survey-prior-art` | Deep research across Hub models, datasets, papers, Spaces and GitHub, with parallel scouts | `docs/prior-art.md`, `docs/research/` |
 | `compare-approaches` | Walk the approach ladder from no model up to training from scratch, and record a verdict | `docs/options.md`, `docs/decisions/` |
@@ -60,8 +60,11 @@ capture-model-idea ─► model-exists-check ─► start-model-project ─► f
 - **The repo is the handover.** Dated findings, confirmed vs inferred claims, a
   machine-readable `project.json`, and a decision file per choice. See
   [workspace-layout.md](references/workspace-layout.md).
-- **Private by default.** Planning repos are created private, and nothing is
-  published to the Hub without an explicit request.
+- **Private by default, public when the model is.** Planning repos are created
+  private, and nothing is published to the Hub without an explicit request. A model
+  headed for public release gets a public GitHub repo tracking its whole lifecycle
+  next to the Hub model and dataset, and its card says plainly whose use case it
+  was built for and how to adapt it.
 
 ## Optional hub
 

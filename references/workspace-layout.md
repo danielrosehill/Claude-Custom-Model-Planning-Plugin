@@ -9,8 +9,12 @@ tell what the idea is, what was found, what was decided and why, and what happen
 next. It should not need this plugin, a chat history or the user's memory.
 
 Repos are **private by default**. Ideas are often half-formed or commercially
-sensitive. The user can make one public later, and a model can be public on the Hub
-while its planning repo stays private.
+sensitive. When a model is going to be released publicly on the Hub, the project
+also gets a **public GitHub repo tracking the whole lifecycle** alongside the Hub
+model and dataset: either the project repo itself is public, or a private working
+repo is paired with a public tracker repo when the working repo holds private
+material. `start-model-project` makes that choice and records it in
+`project.json` → `release`.
 
 ## The optional hub
 
@@ -39,6 +43,7 @@ project's README and the Hub before quoting it.
       "status": "planning",
       "status_date": "2026-10-15",
       "hf": {"models": [], "datasets": [], "spaces": []},
+      "public_repo": null,
       "notes": ""
     }
   ]
@@ -116,7 +121,12 @@ Update `updated` and the relevant stage on every write. When a hub exists, mirro
     "hub_entry": null,
     "hf_models": [],
     "hf_datasets": [],
-    "implementation_repo": null
+    "implementation_repo": null,
+    "public_repo": null
+  },
+  "release": {
+    "intent": "private",
+    "shape": null
   }
 }
 ```
@@ -127,6 +137,12 @@ Update `updated` and the relevant stage on every write. When a hub exists, mirro
 - `verdict` is set by `compare-approaches`: `use-existing` | `no-model` |
   `prompt-an-llm` | `fine-tune` | `distill` | `train-from-scratch` | `abandon`.
 - `exists_check.result` takes `exists` | `partial` | `none`.
+- `release.intent` takes `private` | `public` | `undecided`. `release.shape` is
+  `null` unless `intent` is `public`, then `single-public-repo` |
+  `working-plus-tracker`. `links.public_repo` is set only for `working-plus-tracker`;
+  for a single public repo, `links.github` is already the public repo.
+- `project.json` files written before `release` existed are read as
+  `{"intent": "undecided"}`.
 
 ## Writing rules
 
