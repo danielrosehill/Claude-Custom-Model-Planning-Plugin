@@ -1,6 +1,6 @@
 {
   "name": "custom-model-planning",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Plan custom small models and fine-tunes: check what the Hub already offers, research the options, and write the spec, all in a planning repo.",
   "author": {
     "name": "Daniel Rosehill",
@@ -15,6 +15,7 @@
     "hugging-face",
     "model-research",
     "model-spec",
-    "open-source-ai"
+    "open-source-ai",
+    "training"
   ]
 }

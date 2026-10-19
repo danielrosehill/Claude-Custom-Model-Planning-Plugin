@@ -172,10 +172,20 @@ The plugin stores only pointers, never the repos themselves:
   "github_owner": "<user-or-org>",
   "default_visibility": "private",
   "hf_owner": "<hf-user-or-org>",
-  "compute_notes": "CPU-only laptop; GPU training on a rented cloud GPU"
+  "compute_notes": "CPU-only laptop; GPU training on a rented cloud GPU",
+  "training_compute": {
+    "provider": "modal",
+    "app": "ai-training",
+    "app_path": "~/repos/ai-models/Modal-AI-Training",
+    "env": "MODAL_PROFILE=<workspace>",
+    "dedicated_apps": {"<project-name>": "<its own app>"}
+  }
 }
 ```
 
-`hub_path` and `compute_notes` are optional. The first skill that needs a missing
+`training_compute` is where `run-training-job` sends GPU jobs: one general-purpose app,
+plus any projects that keep a dedicated app of their own.
+
+`hub_path`, `compute_notes` and `training_compute` are optional. The first skill that needs a missing
 value asks for it once and writes it. If the hub has its own `CLAUDE.md` or README
 conventions (naming, where repos are filed, HF orgs), **those win** over this file.
