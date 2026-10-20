@@ -46,4 +46,5 @@ Plugin references live at `../../references/` relative to this skill's directory
 - Don't create a new cloud app for a one-off job. If a project grows a repeated
   multi-stage pipeline (prepare → train → export → publish), propose giving it a
   dedicated app and adding it to `training_compute.dedicated_apps`.
-- Don't publish anything to the Hub from a training run without an explicit request.
+- Don't publish anything to the Hub from a training run without an explicit request. When the
+  round is done, `finish-training-run` publishes, archives and clears the storage.

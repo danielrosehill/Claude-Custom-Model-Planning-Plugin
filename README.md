@@ -10,7 +10,8 @@ lifecycle:
 It checks what the Hugging Face Hub already offers, records the idea in a private
 planning repository, researches the options, writes the findings up, and ends with
 a specification someone can build from. It does not write training code;
-`run-training-job` only routes jobs to your designated training compute. Training,
+`run-training-job` only routes jobs to your designated training compute, and
+`finish-training-run` publishes the result and clears the training storage afterwards. Training,
 labelling and evaluation hand off to the official Hugging Face skills and other
 plugins when they are installed.
 
@@ -44,6 +45,7 @@ capture-model-idea ─► model-exists-check ─► start-model-project ─► f
 | `write-model-spec` | The build spec plus a draft Hub model card | `docs/spec.md`, `docs/model-card-draft.md` |
 | `model-project-status` | Stage, verdict and next step for one project, or every project in the hub | — |
 | `run-training-job` | Run training/fine-tune/eval jobs on the one designated training app (config `training_compute`), smoke run first | run log in the project |
+| `finish-training-run` | Close out a round: publish the best run to the Hub, archive its weights, verify both, then delete the round's weights and checkpoints from the training storage so it stops costing money | Hub repo, run log |
 
 ### Agent
 
