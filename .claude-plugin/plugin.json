@@ -1,6 +1,6 @@
 {
   "name": "custom-model-planning",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Plan custom small models and fine-tunes: check what the Hub already offers, research the options, and write the spec, all in a planning repo.",
   "author": {
     "name": "Daniel Rosehill",
