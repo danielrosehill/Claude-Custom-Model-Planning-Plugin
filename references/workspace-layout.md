@@ -178,13 +178,17 @@ The plugin stores only pointers, never the repos themselves:
     "app": "ai-training",
     "app_path": "~/repos/ai-models/Modal-AI-Training",
     "env": "MODAL_PROFILE=<workspace>",
+    "volume": "ai-training",
+    "archive": "<how weights are archived: a skill name, or e.g. rclone:<remote>:<bucket>/<prefix>>",
     "dedicated_apps": {"<project-name>": "<its own app>"}
   }
 }
 ```
 
 `training_compute` is where `run-training-job` sends GPU jobs: one general-purpose app,
-plus any projects that keep a dedicated app of their own.
+plus any projects that keep a dedicated app of their own. `volume` and `archive` are read by
+`finish-training-run`: where run outputs live, and how released weights are archived before the
+storage is cleared.
 
 `hub_path`, `compute_notes` and `training_compute` are optional. The first skill that needs a missing
 value asks for it once and writes it. If the hub has its own `CLAUDE.md` or README

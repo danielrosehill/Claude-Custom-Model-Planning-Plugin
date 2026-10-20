@@ -11,16 +11,18 @@ removes them. This skill is the other end: one run goes to the Hub, its weights 
 archive, and the storage holds only the small files the docs cite.
 
 Order matters. **Nothing is deleted until the published copy and the archived copy have both
-been checked.** Hugging Face is a publishing channel, not a backup (a published repo has been
-found deleted before: see `parakeet-finetune-ops:wasabi-archive`).
+been checked.** Hugging Face is a publishing channel, not a backup: a published repo can be
+deleted, and then the training storage would have been the last copy.
 
 ## Inputs
 
 - The project's runs for this round, from its run log (`docs/training.md`, `project.json` or
   `runs/`). Only those runs. The storage is shared: never touch another project's run, the
-  shared caches (`hf/`, `uv-cache/` on the `ai-training` volume) or a run that is still going.
-- Config `training_compute` (app, volume, profile). For Daniel: Modal app `ai-training`, volume
-  `ai-training`, `MODAL_PROFILE=danielrosehill`, runs at `runs/<run>/`.
+  shared caches (e.g. `hf/`, `uv-cache/` at the volume root) or a run that is still going.
+- Config `training_compute` (see `workspace-layout.md`): `app`, `env` (profile selector, put on
+  every command), `volume` (where runs live, e.g. a Modal volume with runs at `runs/<run>/`) and
+  `archive` (the user's archive procedure, e.g. a skill name or a bucket path). Ask once for
+  any that are missing and write them.
 - Hub visibility: what the user said, else the project's `visibility` in `project.json`,
   else **private**. Making a model public is publishing; get a yes for it.
 
@@ -40,18 +42,20 @@ found deleted before: see `parakeet-finetune-ops:wasabi-archive`).
    over ~1 GB in its own `hf upload` call (a whole-folder upload was killed by memory pressure
    while hashing a 1.7 GB file, 2026-10-21). Check: list the repo's files and compare each
    LFS `sha256` (`HfApi().model_info(repo, files_metadata=True)`) with the local file.
-4. **Archive.** Daniel's procedure is `parakeet-finetune-ops:wasabi-archive` section 6
-   (bucket `small-models`, `rclone check` must report 0 differences). Archive the published
-   run. Archive runs that were not published only if the user asks; their metrics and
+4. **Archive.** Follow `training_compute.archive`. Whatever the store, write a `SHA256SUMS` per
+   run and verify the archived copy against it (e.g. `rclone check --one-way --checksum`, 0
+   differences). If no archive is configured, ask; do not treat the Hub copy as the archive
+   without the user saying so. Archive the published run. Archive runs that were not published only if the user asks; their metrics and
    predictions in the repo are the record, and any of them retrains from the same command.
 5. **Clean up the storage**, only for this project's runs and only after 3 and 4 checked out:
    delete each run's weights and checkpoints and anything else large; keep `metrics.json`,
    `pred_*.jsonl`, `job.log`.
    ```bash
-   export MODAL_PROFILE=danielrosehill
+   export <training_compute.env>
+   vol=<training_compute.volume>
    for run in <run> ...; do
-     for d in model ckpt onnx; do modal volume rm -r ai-training runs/$run/$d 2>/dev/null; done
-     modal volume ls ai-training runs/$run          # what is left must be small files only
+     for d in model ckpt onnx; do modal volume rm -r $vol runs/$run/$d 2>/dev/null; done
+     modal volume ls $vol runs/$run          # what is left must be small files only
    done
    ```
    Also remove the project's aborted or smoke runs that left weights. Leave the shared
