@@ -29,7 +29,9 @@ Plugin references live at `../../references/` relative to this skill's directory
    status, status_date, task and next step. For entries with a `local_path`, read
    that repo's `project.json` and flag disagreements between it and the registry.
    Do not fix them silently. List them and offer to update.
-3. If asked to fix drift, update the registry from the per-project `project.json`
+3. If the hub has a `datasets.json` (skill `dataset-map`), add each project's datasets from its
+   `consumers` entry, and flag a project whose `hf.datasets` disagrees with it.
+4. If asked to fix drift, update the registry from the per-project `project.json`
    (the more specific source), set `updated`, commit and push the hub.
 
 ## Notes

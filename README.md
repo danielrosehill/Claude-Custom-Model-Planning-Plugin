@@ -44,6 +44,7 @@ capture-model-idea ─► model-exists-check ─► start-model-project ─► f
 | `plan-evaluation` | Metrics, a mandatory no-model baseline, a pass bar fixed before training | `docs/eval-plan.md` |
 | `write-model-spec` | The build spec plus a draft Hub model card | `docs/spec.md`, `docs/model-card-draft.md` |
 | `model-project-status` | Stage, verdict and next step for one project, or every project in the hub | — |
+| `dataset-map` | The hub's map of shared datasets: one canonical corpus, its views, and which projects consume each; reuse before collecting again | `datasets.json` in the hub |
 | `run-training-job` | Run training/fine-tune/eval jobs on the one designated training app (config `training_compute`), climbing a run ladder: smoke → probe → confirm → full, scaling only on evidence | run log in the project |
 | `finish-training-run` | Close out a round: publish the best run to the Hub, archive its weights, verify both, then delete the round's weights and checkpoints from the training storage so it stops costing money | Hub repo, run log |
 

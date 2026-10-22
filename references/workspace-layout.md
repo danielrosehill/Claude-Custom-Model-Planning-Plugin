@@ -24,6 +24,7 @@ material. `start-model-project` makes that choice and records it in
 ├── ideas/<slug>.md           # one file per idea not yet spun out (capture-model-idea)
 ├── research/<slug>/…         # exists-check results for ideas still in the hub
 └── projects.json             # registry of every model project
+├── datasets.json             # optional: shared-dataset map (canonical corpus, views, consumers); skill dataset-map
 ```
 
 `projects.json` is a pointer, not the source of truth. Re-verify a status against the

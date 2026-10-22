@@ -23,7 +23,8 @@ Read `delegation.md`.
 1. **Inventory existing data.** Hub datasets from prior art, the user's own data
    (ask what they have: logs, transcripts, exports), and public corpora. For each,
    record the licence, size, label fit, and whether it may train a model released
-   under the intended licence.
+   under the intended licence. If the hub has a `datasets.json`, start there (skill
+   `dataset-map`): an existing view of the canonical corpus beats collecting the same data again.
 2. **Inspect samples** of any candidate dataset (dataset viewer `first-rows` API or
    the `huggingface-datasets` skill). Check labels against text with word-boundary
    or exact-span matching. Note the error rate found. Do not assume a published
