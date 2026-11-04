@@ -9,9 +9,10 @@ lifecycle:
 
 It checks what the Hugging Face Hub already offers, records the idea in a private
 planning repository, researches the options, writes the findings up, and ends with
-a specification someone can build from. It does not write training code;
-`run-training-job` only routes jobs to your designated training compute, and
-`finish-training-run` publishes the result and clears the training storage afterwards. Training,
+a specification someone can build from. `run-training-job` routes planned jobs to your
+designated training compute, `create-training-run` runs saved recipes from your private
+recipes repo on Modal, RunPod or local Unsloth, and `finish-training-run` publishes the
+result and clears the training storage afterwards. Training,
 labelling and evaluation hand off to the official Hugging Face skills and other
 plugins when they are installed.
 
@@ -47,6 +48,20 @@ capture-model-idea ─► model-exists-check ─► start-model-project ─► f
 | `dataset-map` | The hub's map of shared datasets: one canonical corpus, its views, and which projects consume each; reuse before collecting again | `datasets.json` in the hub |
 | `run-training-job` | Run training/fine-tune/eval jobs on the one designated training app (config `training_compute`), climbing a run ladder: smoke → probe → confirm → full, scaling only on evidence | run log in the project |
 | `finish-training-run` | Close out a round: publish the best run to the Hub, archive its weights, verify both, then delete the round's weights and checkpoints from the training storage so it stops costing money | Hub repo, run log |
+
+### Training recipes and backends
+
+| Skill | What it does | Writes |
+| --- | --- | --- |
+| `setup-recipes-repo` | Create or connect your private GitHub repo for training recipes and save its location | recipes repo, config `recipes_repo` |
+| `create-training-run` | Create a recipe, or launch a saved one on a chosen backend, starting at the smoke rung and confirming any paid launch | `runs/` in the recipes repo |
+| `setup-cloud-training` | Install and authenticate the Modal and RunPod CLIs | config `training_backends` |
+| `setup-unsloth-local` | Check for an NVIDIA GPU, then install Unsloth for on-device fine-tuning | config `training_backends` |
+
+These ship as a starting shell. Customise them in your user overlay, which plugin updates
+never touch: `scripts/paths.sh init` creates it and seeds a placeholder for each skill in
+`overrides/`, and you can add your own backends and recipe template. See
+[workspace-layout.md](references/workspace-layout.md#user-overlay).
 
 ### Agent
 

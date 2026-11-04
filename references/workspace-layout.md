@@ -182,6 +182,12 @@ The plugin stores only pointers, never the repos themselves:
     "volume": "ai-training",
     "archive": "<how weights are archived: a skill name, or e.g. rclone:<remote>:<bucket>/<prefix>>",
     "dedicated_apps": {"<project-name>": "<its own app>"}
+  },
+  "recipes_repo": {"path": "~/repos/ai-models/Training-Recipes", "remote": "<owner>/Training-Recipes"},
+  "training_backends": {
+    "modal": {"status": "ready"},
+    "runpod": {"status": "ready"},
+    "local-unsloth": {"unsloth_env": "~/unsloth_env", "gpu": "<gpu-name>"}
   }
 }
 ```
@@ -191,6 +197,28 @@ plus any projects that keep a dedicated app of their own. `volume` and `archive`
 `finish-training-run`: where run outputs live, and how released weights are archived before the
 storage is cleared.
 
-`hub_path`, `compute_notes` and `training_compute` are optional. The first skill that needs a missing
+`recipes_repo` is the user's private recipes repo, set by `setup-recipes-repo`.
+`training_backends` records what `setup-cloud-training` and `setup-unsloth-local` installed,
+and `create-training-run` reads both.
+
+`hub_path`, `compute_notes`, `training_compute`, `recipes_repo` and `training_backends` are optional. The first skill that needs a missing
 value asks for it once and writes it. If the hub has its own `CLAUDE.md` or README
 conventions (naming, where repos are filed, HF orgs), **those win** over this file.
+
+## User overlay
+
+The folder holding `config.json` is also the user's overlay. Plugin updates replace the
+plugin, never this folder, so customisations go here. `scripts/paths.sh` resolves it
+(`$CUSTOM_MODEL_PLANNING_HOME` overrides the location), and `paths.sh init` creates it.
+
+```
+<data dir>/
+├── config.json
+├── overrides/<skill>.md     # your instructions for a skill; seeded as empty placeholders
+├── backends/<name>.md       # your own backend, or a replacement for a built-in one
+└── recipe-template/         # replaces the built-in template when it has a recipe.yaml
+```
+
+Lookup is overlay first, then the plugin's `seeds/`, by file name. Built-ins are read from
+the plugin rather than copied, so they keep getting fixes. To add a backend, drop a new
+`<name>.md` in `backends/` and it appears in `create-training-run`.

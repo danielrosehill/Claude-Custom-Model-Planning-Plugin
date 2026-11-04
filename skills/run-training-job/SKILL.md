@@ -12,6 +12,8 @@ laptop.
 
 Plugin references live at `../../references/` relative to this skill's directory.
 
+For a saved recipe outside a planned model project, use `create-training-run`.
+
 ## Inputs
 
 - The job: a training script/directory in the model repo, the command that runs it, and a

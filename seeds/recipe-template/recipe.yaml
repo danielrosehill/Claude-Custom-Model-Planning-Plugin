@@ -1,0 +1,16 @@
+# One training recipe. Replace every placeholder.
+name: <recipe-slug>
+description: <what this recipe trains and why>
+base_model: <hub-id>
+dataset: <hub-id-or-path>        # pin a revision
+method: <lora|qlora|full>
+backend: <modal|runpod|local-unsloth>
+gpu: <gpu-type>
+hyperparameters:
+  epochs: 1
+  learning_rate: 2.0e-4
+  batch_size: 4
+ladder:                          # sizes for each rung of the run ladder
+  smoke: {train_rows: 50, eval_rows: 16}
+  probe: {train_rows: 1000, eval_rows: 100}
+outputs: outputs/
