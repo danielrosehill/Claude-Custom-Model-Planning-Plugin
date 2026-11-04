@@ -86,7 +86,7 @@ The plugin degrades gracefully without these and uses the `hf` CLI or REST API d
   `hf-cli`, `huggingface-papers`, `huggingface-datasets`, `hf-mem`, and the trainer
   skills for the build phase.
 - **Same marketplace:** `data-annotation`, `synthetic-data`, `data-wrangler`,
-  `eval-runner`, and `ai-model-research` (for choosing a hosted LLM when the verdict
+  `ai-eval`, and `ai-model-research` (for choosing a hosted LLM when the verdict
   is "prompt an LLM").
 
 See [delegation.md](references/delegation.md).

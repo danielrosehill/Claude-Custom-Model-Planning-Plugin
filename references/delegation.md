@@ -18,7 +18,7 @@ Skill names as of 2026-10-15:
 | Fine-tuning LLMs (SFT/DPO/GRPO) | `huggingface-llm-trainer`, `trl-training` | Write the training recipe into the spec only |
 | Sentence-transformers / embedding training | `train-sentence-transformers` | Same |
 | Vision fine-tuning | `huggingface-vision-trainer` | Same |
-| Running community evals | `huggingface-community-evals` | `eval-runner` (below) or lighteval docs |
+| Running community evals | `huggingface-community-evals` | `ai-eval` (below) or lighteval docs |
 | Will it fit in memory? | `hf-mem` | params × bytes-per-param × ~1.2 overhead, stated as an estimate |
 | Browser / on-device inference | `transformers-js` | — |
 
@@ -29,7 +29,7 @@ Skill names as of 2026-10-15:
 | Designing a label schema and annotating data | `data-annotation` |
 | Generating synthetic training data | `synthetic-data` |
 | Cleaning and packaging datasets, pushing to the Hub | `data-wrangler` |
-| Building and running eval suites | `eval-runner` |
+| Building and running eval suites | `ai-eval` |
 | Choosing a **hosted** LLM to call (rung 2 of the ladder) | `ai-model-research` (OpenRouter catalogue) |
 
 ## Boundaries

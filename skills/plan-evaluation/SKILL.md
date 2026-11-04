@@ -42,7 +42,7 @@ Read `approach-ladder.md` (the baseline rule) and `delegation.md`.
    run (e.g. 50), and where findings are logged.
 6. Write `docs/eval-plan.md` with metrics, baselines (with implementation notes),
    pass bar, slices, error-analysis protocol, and the tool to run it. Use
-   `eval-runner` or `huggingface-community-evals` if installed. Otherwise give a
+   `ai-eval` or `huggingface-community-evals` if installed. Otherwise give a
    short script outline. Update `project.json` (`stages.evaluation`). Commit.
 7. Suggest `write-model-spec`.
 
