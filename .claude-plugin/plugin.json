@@ -1,6 +1,6 @@
 {
   "name": "custom-model-planning",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Plan custom small models and fine-tunes: check what the Hub already offers, research the options, and write the spec, all in a planning repo. Then save training recipes in a private repo and run them on Modal, RunPod or local Unsloth, customised from a user overlay that survives updates.",
   "author": {
     "name": "Daniel Rosehill",

@@ -44,6 +44,8 @@ capture-model-idea ─► model-exists-check ─► start-model-project ─► f
 | `plan-training-data` | Sources, labelling, synthetic data, volumes, leakage-safe splits, licence chain | `docs/data-plan.md` |
 | `plan-evaluation` | Metrics, a mandatory no-model baseline, a pass bar fixed before training | `docs/eval-plan.md` |
 | `write-model-spec` | The build spec plus a draft Hub model card | `docs/spec.md`, `docs/model-card-draft.md` |
+| `evaluate-incremental-training` | Before retraining: can the model continue from its last checkpoint? Measures the delta and checks tokenizer, labels, format, splits and distribution against the parent run. Verdict: incremental / after a fix / from scratch / keep building | JSON beside the run records |
+| `standardize-dataset` | Before a from-scratch run: inventory the conventions across every constituent dataset, write one standard, dry-run the rewrite and enforce it at ingest | standard doc, decisions file, rewritten labels (on your yes) |
 | `model-project-status` | Stage, verdict and next step for one project, or every project in the hub | — |
 | `dataset-map` | The hub's map of shared datasets: one canonical corpus, its views, and which projects consume each; reuse before collecting again | `datasets.json` in the hub |
 | `run-training-job` | Run training/fine-tune/eval jobs on the one designated training app (config `training_compute`), climbing a run ladder: smoke → probe → confirm → full, scaling only on evidence | run log in the project |
