@@ -45,7 +45,7 @@ For a saved recipe outside a planned model project, use `create-training-run`.
 ## The run ladder: probe small, scale on evidence
 
 Early in a project the question is *which approach works*, not *how good can it get*.
-Answer it with runs of minutes, not hours. Daniel set this rule on 2026-10-21 after a
+Answer it with runs of minutes, not hours. The user set this rule on 2026-10-21 after a
 52-minute first full run of Proximate-Pseudonymizer only showed the approach was wrong
 (a quarter of the identifying details leaked). A 64-row smoke run of the next idea had
 already shown its signal in two minutes.
