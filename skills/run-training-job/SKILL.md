@@ -34,7 +34,8 @@ For a saved recipe outside a planned model project, use `create-training-run`.
    to the container's ephemeral disk.
 3. **Climb the run ladder** (below). On a new script, the first rung is a smoke run on the
    cheapest GPU. Until a probe run shows the approach working, every run is a probe.
-4. **Launch.** Smallest GPU that fits the model and batch size. Detach anything longer
+4. **Launch.** Smallest GPU that fits the model and batch size, **always as a fallback list,
+   never a single type** (see *GPU fallback lists* below). Detach anything longer
    than a few minutes so it survives the session ending. Put any profile/workspace
    selector from `training_compute` on every command.
 5. **Record.** When the run finishes, fetch its outputs into the model repo (or record
@@ -73,6 +74,17 @@ Rules:
 - **Report each probe as a go/no-go against the pass bar,** with its cost, before the next
   launch. Don't present probe numbers as final.
 - The run log (`project.json`) records the rung of every run.
+
+## GPU fallback lists
+
+Always give a job an ordered list of GPU types that fit, not one type, e.g. on Modal
+`gpu=["L4", "A10G", "L40S"]` for inference/ASR work, `gpu=["L40S", "A100-40GB", "A100-80GB"]`
+for a LoRA fine-tune. Assume the most in-demand types (L4, H100) are scarce at any given
+time. The user set this rule on 2026-11-19, after a Hebrew TTS-adapter judge pass pinned
+to `gpu="L4"` sat with no container scheduled while L4s were in short supply. Order the
+list cheapest-first; put a costlier type in only if the job's total cost on it is still
+acceptable. If a job has not been given a container after ~10 minutes, check the queue
+(`modal app list`, `modal container list`) rather than waiting.
 
 ## Don'ts
 
